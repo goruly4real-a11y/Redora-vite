@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import { ParticleWave } from './ParticleWave'
+import { ParticleBackground } from './ParticleBackground'
+import { TextRotate } from './TextRotate'
 
 export function HeroBanner() {
   const ref = useRef(null)
@@ -18,8 +19,8 @@ export function HeroBanner() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#0a0a0a] via-[#111111] to-[#1a1a1a]"
     >
-      {/* Particle Wave Background */}
-      <ParticleWave />
+      {/* tsParticles Background */}
+      <ParticleBackground />
 
       {/* Radial glow */}
       <div className="absolute inset-0 z-[1]">
@@ -61,17 +62,15 @@ export function HeroBanner() {
           <div className="w-16 h-px bg-gradient-to-l from-transparent to-redora-red" />
         </motion.div>
 
-        {/* Brand name */}
-        <motion.h1 
-          className="text-7xl md:text-9xl font-bold tracking-wider mb-6"
+        {/* Brand name with text rotate effect */}
+        <motion.div 
+          className="mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
-            REDORA
-          </span>
-        </motion.h1>
+          <TextRotate text="REDORA" className="text-7xl md:text-9xl font-bold tracking-wider" />
+        </motion.div>
 
         {/* Decorative divider */}
         <motion.div 
