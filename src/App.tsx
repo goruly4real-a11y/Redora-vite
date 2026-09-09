@@ -1,16 +1,22 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { LenisProvider } from './components/LenisProvider'
 import { CinematicHero } from './components/CinematicHero'
 import { ParallaxSection } from './components/ParallaxSection'
 import { ScrollReveal } from './components/ScrollReveal'
 import { HorizontalScroll } from './components/HorizontalScroll'
 import { ProductCard } from './components/ProductCard'
-import { products } from './data/products'
+import { InteractiveAvatar } from './components/InteractiveAvatar'
+import { FloatingElement } from './components/FloatingElement'
+import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
+import { FashionPage } from './pages/FashionPage'
+import { products } from './data/products'
 
-function App() {
+function HomePage() {
   return (
     <LenisProvider>
       <main className="bg-[#0a0a0a] min-h-screen">
+        <Navbar />
         <CinematicHero />
 
         <section className="relative py-32 px-4">
@@ -18,9 +24,11 @@ function App() {
             <div className="max-w-7xl mx-auto">
               <ScrollReveal>
                 <div className="text-center mb-20">
-                  <span className="text-redora-red text-sm tracking-[0.3em] uppercase block mb-4">
-                    Featured Collection
-                  </span>
+                  <FloatingElement speed={0.3}>
+                    <span className="text-redora-red text-sm tracking-[0.3em] uppercase block mb-4">
+                      Featured Collection
+                    </span>
+                  </FloatingElement>
                   <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
                     Curated for the{' '}
                     <span className="text-redora-red italic">Elite</span>
@@ -52,13 +60,15 @@ function App() {
               <div className="grid md:grid-cols-2 gap-16 items-center">
                 <ScrollReveal direction="left">
                   <div className="relative">
-                    <div className="aspect-[4/5] overflow-hidden">
-                      <img
-                        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800"
-                        alt="Luxury Store"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    <FloatingElement speed={0.2} rotateRange={3}>
+                      <div className="aspect-[4/5] overflow-hidden">
+                        <img
+                          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800"
+                          alt="Luxury Store"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </FloatingElement>
                     <div className="absolute -bottom-8 -right-8 w-48 h-48 border border-redora-red/30" />
                     <div className="absolute -top-8 -left-8 w-32 h-32 border border-white/10" />
                   </div>
@@ -83,9 +93,11 @@ function App() {
                       to excellence is unwavering. Discover a world where quality
                       meets sophistication.
                     </p>
-                    <button className="group relative px-8 py-4 bg-redora-red text-white uppercase tracking-widest text-sm overflow-hidden transition-all duration-500 hover:bg-redora-red/90">
-                      <span className="relative z-10">Discover More</span>
-                    </button>
+                    <FloatingElement speed={0.1}>
+                      <button className="group relative px-8 py-4 bg-redora-red text-white uppercase tracking-widest text-sm overflow-hidden transition-all duration-500 hover:bg-redora-red/90">
+                        <span className="relative z-10">Discover More</span>
+                      </button>
+                    </FloatingElement>
                   </div>
                 </ScrollReveal>
               </div>
@@ -96,6 +108,39 @@ function App() {
         <section className="relative py-32 px-4">
           <ParallaxSection speed={0.1}>
             <div className="max-w-5xl mx-auto text-center">
+              <ScrollReveal>
+                <span className="text-redora-red text-sm tracking-[0.3em] uppercase block mb-4">
+                  Our Team
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-16">
+                  Meet the <span className="text-redora-red italic">Visionaries</span>
+                </h2>
+              </ScrollReveal>
+
+              <div className="flex justify-center gap-16 mb-20">
+                <ScrollReveal delay={0}>
+                  <InteractiveAvatar
+                    name="Alexandra Chen"
+                    role="Creative Director"
+                    color="#C41E3A"
+                  />
+                </ScrollReveal>
+                <ScrollReveal delay={0.2}>
+                  <InteractiveAvatar
+                    name="Marcus Webb"
+                    role="Head of Design"
+                    color="#D4AF37"
+                  />
+                </ScrollReveal>
+                <ScrollReveal delay={0.4}>
+                  <InteractiveAvatar
+                    name="Sophia Laurent"
+                    role="Style Curator"
+                    color="#8B0000"
+                  />
+                </ScrollReveal>
+              </div>
+
               <ScrollReveal>
                 <span className="text-redora-red text-sm tracking-[0.3em] uppercase block mb-4">
                   Testimonials
@@ -124,16 +169,18 @@ function App() {
                   },
                 ].map((testimonial, index) => (
                   <ScrollReveal key={index} delay={index * 0.2}>
-                    <div className="p-8 border border-white/10 hover:border-redora-red/30 transition-colors duration-500">
-                      <div className="text-redora-red text-4xl mb-6">&ldquo;</div>
-                      <p className="text-white/70 text-lg mb-8 italic leading-relaxed">
-                        {testimonial.quote}
-                      </p>
-                      <div>
-                        <p className="text-white font-medium">{testimonial.author}</p>
-                        <p className="text-white/40 text-sm">{testimonial.role}</p>
+                    <FloatingElement speed={0.15} rotateRange={2}>
+                      <div className="p-8 border border-white/10 hover:border-redora-red/30 transition-colors duration-500">
+                        <div className="text-redora-red text-4xl mb-6">&ldquo;</div>
+                        <p className="text-white/70 text-lg mb-8 italic leading-relaxed">
+                          {testimonial.quote}
+                        </p>
+                        <div>
+                          <p className="text-white font-medium">{testimonial.author}</p>
+                          <p className="text-white/40 text-sm">{testimonial.role}</p>
+                        </div>
                       </div>
-                    </div>
+                    </FloatingElement>
                   </ScrollReveal>
                 ))}
               </div>
@@ -141,9 +188,57 @@ function App() {
           </ParallaxSection>
         </section>
 
+        <section className="relative py-32 px-4 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#111111] to-[#0a0a0a]" />
+
+          <ParallaxSection speed={0.1} className="relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <ScrollReveal>
+                <FloatingElement speed={0.2}>
+                  <span className="text-redora-red text-sm tracking-[0.3em] uppercase block mb-4">
+                    Newsletter
+                  </span>
+                </FloatingElement>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                  Stay <span className="text-redora-red italic">Updated</span>
+                </h2>
+                <p className="text-white/50 text-lg mb-12 max-w-2xl mx-auto">
+                  Subscribe to receive exclusive offers, new arrivals, and style inspiration directly to your inbox.
+                </p>
+              </ScrollReveal>
+
+              <ScrollReveal delay={0.2}>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 px-6 py-4 bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-redora-red transition-colors"
+                  />
+                  <FloatingElement speed={0.1}>
+                    <button className="px-8 py-4 bg-redora-red text-white uppercase tracking-widest text-sm hover:bg-redora-red/90 transition-colors">
+                      Subscribe
+                    </button>
+                  </FloatingElement>
+                </div>
+              </ScrollReveal>
+            </div>
+          </ParallaxSection>
+        </section>
+
         <Footer />
       </main>
     </LenisProvider>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/fashion" element={<FashionPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -1,8 +1,16 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { Logo } from './Logo'
 
-const categories = ['Electronics', 'Fashion', 'Home & Garden', 'Sports', 'Beauty', 'Toys']
+const categories = [
+  { name: 'Electronics', path: '/' },
+  { name: 'Fashion', path: '/fashion' },
+  { name: 'Home & Garden', path: '/' },
+  { name: 'Sports', path: '/' },
+  { name: 'Beauty', path: '/' },
+  { name: 'Toys', path: '/' },
+]
 
 export function Navbar() {
   const [cartCount] = useState(0)
@@ -35,17 +43,20 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-10">
             {categories.map((cat, i) => (
-              <motion.a
-                key={cat}
-                href="#"
-                className="text-white/60 hover:text-white text-sm tracking-widest uppercase transition-colors duration-300 relative group"
+              <motion.div
+                key={cat.name}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
               >
-                {cat}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-redora-red transition-all duration-300 group-hover:w-full" />
-              </motion.a>
+                <Link
+                  to={cat.path}
+                  className="text-white/60 hover:text-white text-sm tracking-widest uppercase transition-colors duration-300 relative group"
+                >
+                  {cat.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-redora-red transition-all duration-300 group-hover:w-full" />
+                </Link>
+              </motion.div>
             ))}
           </div>
 
@@ -117,16 +128,20 @@ export function Navbar() {
           >
             <div className="px-6 py-6 space-y-4">
               {categories.map((cat, i) => (
-                <motion.a
-                  key={cat}
-                  href="#"
-                  className="block text-white/60 hover:text-white text-sm tracking-widest uppercase transition-colors"
+                <motion.div
+                  key={cat.name}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  {cat}
-                </motion.a>
+                  <Link
+                    to={cat.path}
+                    className="block text-white/60 hover:text-white text-sm tracking-widest uppercase transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {cat.name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </motion.div>
