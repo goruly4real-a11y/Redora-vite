@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { ParticleBackground } from './ParticleBackground'
-import { TextRotate } from './TextRotate'
+import { TextScramble } from './TextScramble'
+import { MagneticButton } from './MagneticButton'
 
 export function HeroBanner() {
   const ref = useRef(null)
@@ -15,41 +16,36 @@ export function HeroBanner() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
 
   return (
-    <section 
+    <section
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#0a0a0a] via-[#111111] to-[#1a1a1a]"
     >
-      {/* tsParticles Background */}
       <ParticleBackground />
 
-      {/* Radial glow */}
       <div className="absolute inset-0 z-[1]">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-redora-red/10 rounded-full blur-[150px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-redora-red/8 rounded-full blur-[150px]" />
       </div>
 
-      {/* Decorative lines */}
       <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
-        <motion.div 
-          className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-redora-red/20 to-transparent"
+        <motion.div
+          className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-redora-red/15 to-transparent"
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
-          transition={{ duration: 2, ease: 'easeInOut' }}
+          transition={{ duration: 2, ease: [0.4, 0, 0.2, 1] }}
         />
-        <motion.div 
-          className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"
+        <motion.div
+          className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-white/8 to-transparent"
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
-          transition={{ duration: 2, delay: 0.5, ease: 'easeInOut' }}
+          transition={{ duration: 2, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
         />
       </div>
 
-      {/* Content */}
-      <motion.div 
+      <motion.div
         className="relative z-10 text-center px-4 max-w-5xl mx-auto"
         style={{ opacity, y, scale }}
       >
-        {/* Decorative element */}
-        <motion.div 
+        <motion.div
           className="flex items-center justify-center gap-4 mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -62,78 +58,73 @@ export function HeroBanner() {
           <div className="w-16 h-px bg-gradient-to-l from-transparent to-redora-red" />
         </motion.div>
 
-        {/* Brand name with text rotate effect */}
-        <motion.div 
+        <motion.div
           className="mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
         >
-          <TextRotate text="REDORA" className="text-7xl md:text-9xl font-bold tracking-wider" />
+          <h1 className="text-7xl md:text-9xl font-bold tracking-wider">
+            <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
+              <TextScramble text="REDORA" />
+            </span>
+          </h1>
         </motion.div>
 
-        {/* Decorative divider */}
-        <motion.div 
+        <motion.div
           className="flex items-center justify-center gap-3 mb-8"
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
+          transition={{ duration: 1, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
         >
           <div className="w-24 h-px bg-gradient-to-r from-transparent to-redora-red/50" />
           <div className="w-2 h-2 rotate-45 bg-redora-red" />
           <div className="w-24 h-px bg-gradient-to-l from-transparent to-redora-red/50" />
         </motion.div>
 
-        {/* Motto */}
-        <motion.p 
+        <motion.p
           className="text-xl md:text-2xl tracking-[0.3em] uppercase mb-4 text-white/60 font-light"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
+          transition={{ duration: 1, delay: 1, ease: [0.4, 0, 0.2, 1] }}
         >
           You&apos;ve seen the rest
         </motion.p>
 
-        <motion.p 
+        <motion.p
           className="text-3xl md:text-5xl font-light italic text-white/90 mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.3 }}
+          transition={{ duration: 1, delay: 1.3, ease: [0.4, 0, 0.2, 1] }}
         >
           now shop the{' '}
           <span className="text-redora-red font-medium">best</span>
         </motion.p>
 
-        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.6 }}
+          transition={{ duration: 1, delay: 1.6, ease: [0.4, 0, 0.2, 1] }}
         >
-          <motion.button 
-            className="group relative px-10 py-4 border border-redora-red/50 text-white uppercase tracking-widest text-sm overflow-hidden transition-all duration-500 hover:border-redora-red"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
+          <MagneticButton className="group relative px-10 py-4 border border-redora-red/50 text-white uppercase tracking-widest text-sm overflow-hidden transition-all duration-500 hover:border-redora-red">
             <span className="absolute inset-0 bg-redora-red transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
             <span className="relative z-10">Explore Collection</span>
-          </motion.button>
+          </MagneticButton>
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
       >
-        <motion.div 
+        <motion.div
           className="w-6 h-10 border border-white/30 rounded-full flex justify-center"
           animate={{ opacity: [0.3, 1, 0.3] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <motion.div 
+          <motion.div
             className="w-1 h-2 bg-white/60 rounded-full mt-2"
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

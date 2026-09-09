@@ -26,14 +26,21 @@ export function ParticleBackground() {
             enable: true,
             mode: 'grab',
           },
+          onClick: {
+            enable: true,
+            mode: 'push',
+          },
         },
         modes: {
           grab: {
-            distance: 140,
+            distance: 120,
             links: {
-              opacity: 0.3,
+              opacity: 0.25,
               color: '#C41E3A',
             },
+          },
+          push: {
+            quantity: 3,
           },
         },
       },
@@ -43,10 +50,10 @@ export function ParticleBackground() {
         },
         links: {
           color: '#C41E3A',
-          distance: 150,
+          distance: 120,
           enable: true,
-          opacity: 0.15,
-          width: 1,
+          opacity: 0.1,
+          width: 0.5,
         },
         move: {
           direction: 'none' as const,
@@ -55,32 +62,34 @@ export function ParticleBackground() {
             default: 'bounce' as const,
           },
           random: true,
-          speed: 0.4,
+          speed: 0.3,
           straight: false,
         },
         number: {
           density: {
             enable: true,
           },
-          value: 80,
+          value: 60,
         },
         opacity: {
-          value: { min: 0.1, max: 0.4 },
+          value: { min: 0.15, max: 0.5 },
           animation: {
             enable: true,
-            speed: 0.5,
+            speed: 0.3,
             minimumValue: 0.1,
+            sync: false,
           },
         },
         shape: {
           type: 'circle',
         },
         size: {
-          value: { min: 1, max: 2.5 },
+          value: { min: 0.8, max: 2.5 },
           animation: {
             enable: true,
-            speed: 1,
+            speed: 0.8,
             minimumValue: 0.5,
+            sync: false,
           },
         },
       },
