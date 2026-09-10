@@ -9,6 +9,8 @@ import { InteractiveAvatar } from './components/InteractiveAvatar'
 import { FloatingElement } from './components/FloatingElement'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
+import { PortalBackground } from './components/PortalBackground'
+import { BrandOrbs } from './components/BrandOrbs'
 import { FashionPage } from './pages/FashionPage'
 import { ProductPage } from './pages/ProductPage'
 import { TryOnPage } from './pages/TryOnPage'
@@ -19,7 +21,12 @@ function HomePage() {
     <LenisProvider>
       <main className="bg-[#0a0a0a] min-h-screen">
         <Navbar />
-        <CinematicHero />
+        <div className="relative">
+          <PortalBackground />
+          <div className="relative z-10">
+            <CinematicHero />
+          </div>
+        </div>
 
         <section className="relative py-32 px-4">
           <ParallaxSection speed={0.2}>
@@ -118,6 +125,10 @@ function HomePage() {
                   Meet the <span className="text-redora-red italic">Visionaries</span>
                 </h2>
               </ScrollReveal>
+
+              <div className="relative h-64 mb-20">
+                <BrandOrbs />
+              </div>
 
               <div className="flex justify-center gap-16 mb-20">
                 <ScrollReveal delay={0}>

@@ -6,6 +6,7 @@ import { ParallaxSection } from '../components/ParallaxSection'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { Navbar } from '../components/Navbar'
 import { Footer } from '../components/Footer'
+import { WovenClothHero } from '../components/WovenClothHero'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -120,6 +121,10 @@ export function FashionPage() {
 
         <section className="fashion-hero relative h-screen overflow-hidden">
           <div className="absolute inset-0">
+            <WovenClothHero />
+          </div>
+
+          <div className="absolute inset-0 z-10">
             <svg
               ref={pathRef}
               className="absolute inset-0 w-full h-full"
