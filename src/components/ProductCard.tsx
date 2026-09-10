@@ -1,7 +1,7 @@
 import { Product } from '@/types/product'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { ParallaxCard } from './ParallaxCard'
-import { TryOnButton } from './TryOnButton'
 
 interface ProductCardProps {
   product: Product
@@ -18,37 +18,38 @@ export function ProductCard({ product }: ProductCardProps) {
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
       >
-        <div className="relative aspect-square overflow-hidden">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
+        <Link to={`/product/${product.id}`}>
+          <div className="relative aspect-square overflow-hidden">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-          {discount > 0 && (
-            <span className="absolute top-4 left-4 bg-redora-red text-white text-[10px] px-3 py-1.5 tracking-widest uppercase font-medium">
-              -{discount}%
-            </span>
-          )}
+            {discount > 0 && (
+              <span className="absolute top-4 left-4 bg-redora-red text-white text-[10px] px-3 py-1.5 tracking-widest uppercase font-medium">
+                -{discount}%
+              </span>
+            )}
 
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-            <motion.button
-              className="bg-white text-black text-xs tracking-widest uppercase px-6 py-3"
+            <motion.div
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white text-black text-xs tracking-widest uppercase px-6 py-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Quick View
-            </motion.button>
-            <TryOnButton productId={product.id} className="!px-4 !py-3 !text-[10px]" />
+              View Product
+            </motion.div>
           </div>
-        </div>
+        </Link>
 
         <div className="p-5">
-          <h3 className="text-sm text-white/70 line-clamp-2 mb-3 tracking-wide leading-relaxed group-hover:text-white transition-colors duration-300">
-            {product.name}
-          </h3>
+          <Link to={`/product/${product.id}`}>
+            <h3 className="text-sm text-white/70 line-clamp-2 mb-3 tracking-wide leading-relaxed group-hover:text-white transition-colors duration-300">
+              {product.name}
+            </h3>
+          </Link>
 
           <div className="flex items-baseline gap-3 mb-4">
             <span className="text-lg font-medium text-white">${product.price.toFixed(2)}</span>

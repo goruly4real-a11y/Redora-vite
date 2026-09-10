@@ -10,6 +10,7 @@ import { FloatingElement } from './components/FloatingElement'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { FashionPage } from './pages/FashionPage'
+import { ProductPage } from './pages/ProductPage'
 import { TryOnPage } from './pages/TryOnPage'
 import { products } from './data/products'
 
@@ -238,6 +239,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/fashion" element={<FashionPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/tryon/:productId" element={<TryOnPage />} />
       </Routes>
     </BrowserRouter>
