@@ -1,6 +1,7 @@
 import { Product } from '@/types/product'
 import { motion } from 'framer-motion'
 import { ParallaxCard } from './ParallaxCard'
+import { TryOnButton } from './TryOnButton'
 
 interface ProductCardProps {
   product: Product
@@ -32,13 +33,16 @@ export function ProductCard({ product }: ProductCardProps) {
             </span>
           )}
 
-          <motion.button
-            className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white text-black text-xs tracking-widest uppercase px-6 py-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Quick View
-          </motion.button>
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+            <motion.button
+              className="bg-white text-black text-xs tracking-widest uppercase px-6 py-3"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Quick View
+            </motion.button>
+            <TryOnButton productId={product.id} className="!px-4 !py-3 !text-[10px]" />
+          </div>
         </div>
 
         <div className="p-5">
