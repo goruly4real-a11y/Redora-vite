@@ -1,16 +1,25 @@
-import { useEffect, useMemo, useState } from 'react'
 import Particles from '@tsparticles/react'
 import { loadSlim } from '@tsparticles/slim'
-import { initParticlesEngine } from '@tsparticles/react'
 import type { ISourceOptions } from '@tsparticles/engine'
+import { useEffect, useMemo, useState } from 'react'
+
+let initPromise: Promise<void> | null = null
+
+async function initEngine() {
+  if (!initPromise) {
+    const { initParticlesEngine } = await import('@tsparticles/react')
+    initPromise = initParticlesEngine(async (engine: unknown) => {
+      await loadSlim(engine as Parameters<typeof loadSlim>[0])
+    })
+  }
+  return initPromise
+}
 
 export function ParticleBackground() {
   const [init, setInit] = useState(false)
 
   useEffect(() => {
-    initParticlesEngine(async (engine: unknown) => {
-      await loadSlim(engine as Parameters<typeof loadSlim>[0])
-    }).then(() => setInit(true))
+    initEngine().then(() => setInit(true))
   }, [])
 
   const options: ISourceOptions = useMemo(
