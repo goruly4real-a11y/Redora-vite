@@ -6,7 +6,7 @@ import { Product } from '../types/product'
 
 export function AdminDashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [activeTab, setActiveTab] = useState<'upload' | 'products' | 'stats'>('upload')
+  const [activeTab, setActiveTab] = useState('upload')
   const [customProducts, setCustomProducts] = useState<Product[]>([])
 
   useEffect(() => {
@@ -18,13 +18,18 @@ export function AdminDashboard() {
   }, [])
 
   const loadProducts = () => {
-    const stored = JSON.parse(localStorage.getItem('redora_custom_products') || '[]')
+    const stored = JSON.parse(
+      localStorage.getItem('redora_custom_products') || '[]'
+    )
     setCustomProducts(stored)
   }
 
   const handleDeleteProduct = (id: string) => {
     const updated = customProducts.filter((p) => p.id !== id)
-    localStorage.setItem('redora_custom_products', JSON.stringify(updated))
+    localStorage.setItem(
+      'redora_custom_products',
+      JSON.stringify(updated)
+    )
     setCustomProducts(updated)
   }
 
@@ -37,16 +42,26 @@ export function AdminDashboard() {
     return <AdminLogin onLogin={() => setIsLoggedIn(true)} />
   }
 
+  const fashionCount = customProducts.filter((p) => p.isFashion).length
+  const categoryCount = new Set(customProducts.map((p) => p.category)).size
+
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       <header className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-redora-red text-2xl font-bold">Redora</span>
-            <span className="text-white/40 text-sm">Admin Dashboard</span>
+            <span className="text-redora-red text-2xl font-bold">
+              Redora
+            </span>
+            <span className="text-white/40 text-sm">
+              Admin Dashboard
+            </span>
           </div>
           <div className="flex items-center gap-4">
-            <a href="/" className="text-white/50 text-sm hover:text-white transition-colors">
+            <a
+              href="/"
+              className="text-white/50 text-sm hover:text-white transition-colors"
+            >
               View Store
             </a>
             <button
@@ -61,23 +76,36 @@ export function AdminDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex gap-1 mb-8 border-b border-white/10">
-          {[
-            { id: 'upload', label: 'Add Product' },
-            { id: 'products', label: `Products (${customProducts.length})` },
-            { id: 'stats', label: 'Overview' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as typeof activeTab)}
-              className={`px-6 py-3 text-sm tracking-wider transition-colors ${
-                activeTab === tab.id
-                  ? 'text-redora-red border-b-2 border-redora-red'
-                  : 'text-white/50 hover:text-white'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+          <button
+            onClick={() => setActiveTab('upload')}
+            className={`px-6 py-3 text-sm tracking-wider transition-colors ${
+              activeTab === 'upload'
+                ? 'text-redora-red border-b-2 border-redora-red'
+                : 'text-white/50 hover:text-white'
+            }`}
+          >
+            Add Product
+          </button>
+          <button
+            onClick={() => setActiveTab('products')}
+            className={`px-6 py-3 text-sm tracking-wider transition-colors ${
+              activeTab === 'products'
+                ? 'text-redora-red border-b-2 border-redora-red'
+                : 'text-white/50 hover:text-white'
+            }`}
+          >
+            Products ({customProducts.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('stats')}
+            className={`px-6 py-3 text-sm tracking-wider transition-colors ${
+              activeTab === 'stats'
+                ? 'text-redora-red border-b-2 border-redora-red'
+                : 'text-white/50 hover:text-white'
+            }`}
+          >
+            Overview
+          </button>
         </div>
 
         {activeTab === 'upload' && (
@@ -91,7 +119,9 @@ export function AdminDashboard() {
           >
             {customProducts.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-white/40 text-lg mb-4">No products uploaded yet</p>
+                <p className="text-white/40 text-lg mb-4">
+                  No products uploaded yet
+                </p>
                 <button
                   onClick={() => setActiveTab('upload')}
                   className="px-6 py-3 bg-redora-red text-white text-sm tracking-widest uppercase hover:bg-redora-red/90 transition-colors"
@@ -112,10 +142,16 @@ export function AdminDashboard() {
                       className="w-20 h-20 object-cover"
                     />
                     <div className="flex-1">
-                      <h3 className="text-white font-medium mb-1">{product.name}</h3>
-                      <p className="text-white/50 text-sm">{product.brand}</p>
+                      <h3 className="text-white font-medium mb-1">
+                        {product.name}
+                      </h3>
+                      <p className="text-white/50 text-sm">
+                        {product.brand}
+                      </p>
                       <div className="flex items-center gap-3 mt-2">
-                        <span className="text-white text-sm">${product.price.toFixed(2)}</span>
+                        <span className="text-white text-sm">
+                          ${product.price.toFixed(2)}
+                        </span>
                         {product.originalPrice > product.price && (
                           <span className="text-white/30 text-sm line-through">
                             ${product.originalPrice.toFixed(2)}
@@ -151,19 +187,25 @@ export function AdminDashboard() {
             className="grid md:grid-cols-3 gap-6"
           >
             <div className="p-6 bg-white/5 border border-white/10">
-              <p className="text-white/50 text-sm mb-2">Total Products</p>
-              <p className="text-3xl font-bold text-white">{customProducts.length}</p>
+              <p className="text-white/50 text-sm mb-2">
+                Total Products
+              </p>
+              <p className="text-3xl font-bold text-white">
+                {customProducts.length}
+              </p>
             </div>
             <div className="p-6 bg-white/5 border border-white/10">
-              <p className="text-white/50 text-sm mb-2">Fashion Items</p>
+              <p className="text-white/50 text-sm mb-2">
+                Fashion Items
+              </p>
               <p className="text-3xl font-bold text-redora-red">
-                {customProducts.filter((p) => p.isFashion).length}
+                {fashionCount}
               </p>
             </div>
             <div className="p-6 bg-white/5 border border-white/10">
               <p className="text-white/50 text-sm mb-2">Categories</p>
               <p className="text-3xl font-bold text-white">
-                {new Set(customProducts.map((p) => p.category)).size}
+                {categoryCount}
               </p>
             </div>
           </motion.div>
