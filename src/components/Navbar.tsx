@@ -78,6 +78,14 @@ export function Navbar() {
               </svg>
             </motion.div>
 
+            {/* Admin */}
+            <Link
+              to="/admin"
+              className="hidden md:block text-white/40 text-xs tracking-widest uppercase hover:text-redora-red transition-colors"
+            >
+              Admin
+            </Link>
+
             {/* Cart */}
             <motion.button 
               className="relative p-2 text-white/70 hover:text-white transition-colors"

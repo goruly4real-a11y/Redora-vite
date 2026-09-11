@@ -14,6 +14,7 @@ import { BrandOrbs } from './components/BrandOrbs'
 import { FashionPage } from './pages/FashionPage'
 import { ProductPage } from './pages/ProductPage'
 import { TryOnPage } from './pages/TryOnPage'
+import { AdminDashboard } from './pages/AdminDashboard'
 import { products } from './data/products'
 
 function HomePage() {
@@ -252,6 +253,7 @@ function App() {
         <Route path="/fashion" element={<FashionPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/tryon/:productId" element={<TryOnPage />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   )
