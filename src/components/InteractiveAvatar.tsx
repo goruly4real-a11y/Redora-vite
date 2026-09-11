@@ -19,9 +19,6 @@ export function InteractiveAvatar({
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
-  const springX = useSpring(x, { stiffness: 150, damping: 15 })
-  const springY = useSpring(y, { stiffness: 150, damping: 15 })
-
   const rotateX = useSpring(useTransform(y, [-50, 50], [10, -10]), {
     stiffness: 300,
     damping: 30,

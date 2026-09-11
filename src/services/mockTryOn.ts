@@ -14,7 +14,7 @@ export interface TryOnResult {
 
 export async function mockTryOn(
   _userImage: File,
-  garmentImageUrl: string
+  _garmentImageUrl: string
 ): Promise<TryOnResult> {
   await new Promise((resolve) => setTimeout(resolve, 2000))
 

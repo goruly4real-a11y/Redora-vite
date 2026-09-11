@@ -57,14 +57,12 @@ const fashionItems = [
 
 export function FashionPage() {
   const mannequinRef = useRef<HTMLDivElement>(null)
-  const pathRef = useRef<SVGPathElement>(null)
+  const pathRef = useRef<SVGSVGElement>(null)
 
   useEffect(() => {
     const mannequin = mannequinRef.current
     const path = pathRef.current
     if (!mannequin || !path) return
-
-    const pathLength = path.getTotalLength()
 
     gsap.set(mannequin, {
       offsetDistance: '0%',
@@ -95,8 +93,8 @@ export function FashionPage() {
     })
 
     const fashionCards = gsap.utils.toArray('.fashion-card')
-    fashionCards.forEach((card, index) => {
-      gsap.from(card, {
+    fashionCards.forEach((card: unknown, index: number) => {
+      gsap.from(card as Element, {
         opacity: 0,
         y: 100,
         rotation: index % 2 === 0 ? -5 : 5,
@@ -203,7 +201,7 @@ export function FashionPage() {
               </ScrollReveal>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {fashionItems.map((item, index) => (
+                {fashionItems.map((item) => (
                   <div
                     key={item.id}
                     className="fashion-card group relative bg-[#111111] overflow-hidden"
